@@ -2,7 +2,6 @@ package com.anafthdev.snakeclassic.data
 
 import com.anafthdev.snakeclassic.data.model.Point
 import kotlinx.coroutines.*
-import timber.log.Timber
 import kotlin.random.Random
 
 class GameEngine(
@@ -13,7 +12,7 @@ class GameEngine(
 	private var engineJob: Job? = null
 	private var listener: GameListener? = null
 	
-	private var isPaused: Boolean = false
+	private var isPaused: Boolean = true
 	
 	/**
 	 * @return true if collision, false otherwise
@@ -50,8 +49,8 @@ class GameEngine(
 		
 		do {
 			newFoodPosition = Point(
-				x = Random.nextInt(0, board.width),
-				y = Random.nextInt(0, board.height)
+				x = Random.nextInt(0, board.width - 1),
+				y = Random.nextInt(0, board.height - 1)
 			)
 		} while (newFoodPosition in snake.bodies)
 		
@@ -59,6 +58,7 @@ class GameEngine(
 	}
 	
 	fun restart() {
+		snake.updateDirection(Direction.Right)
 		snake.bodies.apply {
 			clear()
 			add(Point(0,0))
@@ -68,7 +68,7 @@ class GameEngine(
 	}
 	
 	fun start() {
-		randomFood()
+		restart()
 		
 		engineJob = CoroutineScope(Dispatchers.IO).launch {
 			while (true) {
@@ -95,10 +95,12 @@ class GameEngine(
 	
 	fun pause() {
 		isPaused = true
+		listener?.isPlaying(false)
 	}
 	
 	fun resume() {
 		isPaused = false
+		listener?.isPlaying(true)
 	}
 	
 	fun stop() {
@@ -106,7 +108,13 @@ class GameEngine(
 		engineJob = null
 	}
 	
+	fun setListener(mListener: GameListener) {
+		listener = mListener
+	}
+	
 	interface GameListener {
+		
+		fun isPlaying(playing: Boolean)
 		
 		fun onGameOver()
 		
