@@ -1,9 +1,9 @@
-package com.anafthdev.snakeclassic.data
+package com.anafthdev.snakeclassic.common
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.anafthdev.snakeclassic.data.model.Point
+import com.anafthdev.snakeclassic.model.Point
 
 class Board(
 	var width: Int = DEFAULT_WIDTH,

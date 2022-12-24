@@ -1,13 +1,11 @@
-package com.anafthdev.snakeclassic.data
+package com.anafthdev.snakeclassic.common
 
-import android.util.Log
-import androidx.compose.runtime.*
-import androidx.compose.runtime.snapshots.SnapshotStateList
-import androidx.compose.runtime.snapshots.StateObject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.anafthdev.snakeclassic.data.model.Point
-import timber.log.Timber
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import com.anafthdev.snakeclassic.data.Direction
+import com.anafthdev.snakeclassic.model.Point
 
 class Snake {
 	

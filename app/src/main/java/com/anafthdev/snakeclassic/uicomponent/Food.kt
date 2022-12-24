@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.anafthdev.snakeclassic.data.model.Point
+import com.anafthdev.snakeclassic.model.Point
 
 @Composable
 fun Food(

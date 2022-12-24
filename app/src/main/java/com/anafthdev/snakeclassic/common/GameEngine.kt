@@ -1,6 +1,8 @@
-package com.anafthdev.snakeclassic.data
+package com.anafthdev.snakeclassic.common
 
-import com.anafthdev.snakeclassic.data.model.Point
+import com.anafthdev.snakeclassic.data.CollisionType
+import com.anafthdev.snakeclassic.data.Direction
+import com.anafthdev.snakeclassic.model.Point
 import kotlinx.coroutines.*
 import timber.log.Timber
 import kotlin.random.Random

@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.Direction
-import com.anafthdev.snakeclassic.data.Snake
 
 @Composable
 fun SnakeBody(

@@ -9,9 +9,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import com.anafthdev.snakeclassic.data.Board
+import com.anafthdev.snakeclassic.common.Board
+import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.Direction.*
-import com.anafthdev.snakeclassic.data.Snake
 import kotlin.math.floor
 
 @Composable

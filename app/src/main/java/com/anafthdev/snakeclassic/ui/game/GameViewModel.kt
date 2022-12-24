@@ -6,10 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.anafthdev.snakeclassic.common.Board
+import com.anafthdev.snakeclassic.common.GameEngine
+import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.ARG_RESTART_GAME
-import com.anafthdev.snakeclassic.data.Board
-import com.anafthdev.snakeclassic.data.GameEngine
-import com.anafthdev.snakeclassic.data.Snake
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
