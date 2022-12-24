@@ -7,6 +7,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,15 +17,20 @@ import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.anafthdev.snakeclassic.common.LocalUiController
 import com.anafthdev.snakeclassic.data.SnakeGameDestination
 import com.anafthdev.snakeclassic.runtime.navigation.DashboardNavHost
 import com.anafthdev.snakeclassic.runtime.navigation.GameNavHost
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun DashboardScreen() {
+	
+	val uiController = LocalUiController.current
 	
 //	val navController = rememberAnimatedNavController()
 //
@@ -37,6 +44,21 @@ fun DashboardScreen() {
 //	}
 	
 	val navController = rememberNavController()
+	
+	val currentRoute by navController.currentBackStackEntryAsState()
+	
+	LaunchedEffect(currentRoute?.destination?.route) {
+		withContext(Dispatchers.Main) {
+			when (currentRoute?.destination?.route) {
+				SnakeGameDestination.Game.Home.route -> {
+					uiController.isNavigationBarShowed = false
+				}
+				else -> {
+					uiController.isNavigationBarShowed = true
+				}
+			}
+		}
+	}
 
 	NavHost(
 		navController = navController,
@@ -50,8 +72,6 @@ fun DashboardScreen() {
 
 @Composable
 fun DashboardContent(navController: NavController) {
-	
-	val uiController = LocalUiController.current
 	
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
@@ -78,8 +98,6 @@ fun DashboardContent(navController: NavController) {
 		
 		OutlinedButton(
 			onClick = {
-				uiController.isNavigationBarShowed = false
-				
 				navController.navigate(SnakeGameDestination.Game.Home.createRoute())
 			}
 		) {

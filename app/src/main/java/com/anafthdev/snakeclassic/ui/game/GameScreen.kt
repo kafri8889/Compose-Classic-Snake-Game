@@ -9,23 +9,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.anafthdev.snakeclassic.common.LocalUiController
 import com.anafthdev.snakeclassic.uicomponent.GameBoard
 import com.anafthdev.snakeclassic.uicomponent.GamePauseDialog
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @Composable
 fun GameScreen(
 	navController: NavController,
 	gameViewModel: GameViewModel
 ) {
-	
-	val uiController = LocalUiController.current
-	
-	val scope = rememberCoroutineScope()
 	
 	val effect by gameViewModel.effect.collectAsState()
 	
@@ -62,14 +53,6 @@ fun GameScreen(
 				currentScore = 0,
 				onExit = {
 					if (!hasPopped) {
-						scope.launch {
-							delay(300)
-							
-							withContext(Dispatchers.Main) {
-								uiController.isNavigationBarShowed = true
-							}
-						}
-						
 						navController.popBackStack()
 					}
 					
