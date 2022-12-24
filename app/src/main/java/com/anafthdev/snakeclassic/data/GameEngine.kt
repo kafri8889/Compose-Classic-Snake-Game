@@ -2,6 +2,7 @@ package com.anafthdev.snakeclassic.data
 
 import com.anafthdev.snakeclassic.data.model.Point
 import kotlinx.coroutines.*
+import timber.log.Timber
 import kotlin.random.Random
 
 class GameEngine(
@@ -13,6 +14,19 @@ class GameEngine(
 	private var listener: GameListener? = null
 	
 	private var isPaused: Boolean = true
+	
+	init {
+		board.setListener(object : Board.BoardListener {
+			override fun onHeightChanged(newHeight: Int) {
+				try {
+					randomFood()
+				} catch (e: IllegalArgumentException) {
+					// Random range is empty: [0, -1)
+					Timber.e(e)
+				}
+			}
+		})
+	}
 	
 	/**
 	 * @return true if collision, false otherwise

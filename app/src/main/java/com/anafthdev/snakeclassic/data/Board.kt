@@ -1,10 +1,8 @@
 package com.anafthdev.snakeclassic.data
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import com.anafthdev.snakeclassic.data.model.Point
 
 class Board(
@@ -12,11 +10,28 @@ class Board(
 	var height: Int = DEFAULT_HEIGHT
 ) {
 	
+	private var listener: BoardListener? = null
+	
 	var foodPosition by mutableStateOf(Point(0,0))
 	private set
 	
 	fun updateFoodPosition(pos: Point) {
 		foodPosition = pos
+	}
+	
+	fun updateHeight(newHeight: Int) {
+		height = newHeight
+		listener?.onHeightChanged(newHeight)
+	}
+	
+	fun setListener(mListener: BoardListener) {
+		listener = mListener
+	}
+	
+	interface BoardListener {
+		
+		fun onHeightChanged(newHeight: Int)
+		
 	}
 
 	companion object {

@@ -31,7 +31,11 @@ fun GameBoard(
 	}
 	
 	val boardHeight = remember(boardSizeDp.height, floorSize) {
-		boardSizeDp.height / floorSize
+		val height = boardSizeDp.height / floorSize
+		
+		floor(height).toInt().also { newBoardHeight ->
+			board.updateHeight(newBoardHeight)  // Update board height
+		}
 	}
 	
 	Box(
@@ -79,9 +83,7 @@ fun GameBoard(
 		BoardBackground(
 			floorSize = floorSize,
 			boardWidthCount = board.width,
-			boardHeightCount = floor(boardHeight).toInt().also { newBoardHeight ->
-				board.height = newBoardHeight  // Update board height
-			},
+			boardHeightCount = boardHeight,
 			modifier = Modifier
 				.zIndex(1f)
 		)
