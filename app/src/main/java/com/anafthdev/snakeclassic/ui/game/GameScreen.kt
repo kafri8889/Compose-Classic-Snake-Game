@@ -6,8 +6,10 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.anafthdev.snakeclassic.uicomponent.GameBoard
 import com.anafthdev.snakeclassic.uicomponent.GamePauseDialog
@@ -46,6 +48,7 @@ fun GameScreen(
 			snake = gameViewModel.snake,
 			modifier = Modifier
 				.fillMaxSize()
+				.padding(24.dp)
 		)
 		
 		AnimatedVisibility(visible = gameViewModel.isPaused) {
