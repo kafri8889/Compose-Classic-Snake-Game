@@ -25,6 +25,9 @@ class SettingViewModel @Inject constructor(
 	var easingAnimation by mutableStateOf(Easing.LinearEasing)
 	private set
 	
+	var easingAnimationDelay by mutableStateOf(250)
+	private set
+	
 	init {
 		viewModelScope.launch {
 			appDatastore.getFloorSize.collect { size ->
@@ -41,6 +44,12 @@ class SettingViewModel @Inject constructor(
 		viewModelScope.launch {
 			appDatastore.getEasingAnimation.collect { easing ->
 				easingAnimation = easing
+			}
+		}
+		
+		viewModelScope.launch {
+			appDatastore.getEasingAnimationDelay.collect { delay ->
+				easingAnimationDelay = delay
 			}
 		}
 	}
@@ -60,6 +69,12 @@ class SettingViewModel @Inject constructor(
 	fun updateEasingAnimation(easing: Easing) {
 		viewModelScope.launch {
 			appDatastore.setEasingAnimation(easing)
+		}
+	}
+	
+	fun updateEasingAnimationDelay(delay: Int) {
+		viewModelScope.launch {
+			appDatastore.setEasingAnimationDelay(delay)
 		}
 	}
 

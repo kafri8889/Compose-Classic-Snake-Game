@@ -34,4 +34,6 @@ object Constant {
 	
 	const val PREFERENCES_EASING_ANIMATION = "preferences_easing_animation"
 	
+	const val PREFERENCES_EASING_ANIMATION_DELAY = "preferences_easing_animation_delay"
+	
 }

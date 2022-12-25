@@ -42,6 +42,15 @@ class AppDatastore @Inject constructor(private val context: Context) {
 		}
 	}
 	
+	/**
+	 * @param delay in milliseconds
+	 */
+	suspend fun setEasingAnimationDelay(delay: Int) {
+		context.datastore.edit { preferences ->
+			preferences[easingAnimationDelay] = delay
+		}
+	}
+	
 	val getFloorSize: Flow<Float> = context.datastore.data.map { preferences ->
 		preferences[floorSize] ?: 6f
 	}
@@ -54,12 +63,17 @@ class AppDatastore @Inject constructor(private val context: Context) {
 		Easing.values()[preferences[easingAnimation] ?: 0]
 	}
 	
+	val getEasingAnimationDelay: Flow<Int> = context.datastore.data.map { preferences ->
+		preferences[easingAnimationDelay] ?: 250
+	}
+	
 	companion object {
 		val Context.datastore: DataStore<Preferences> by preferencesDataStore("app_datastore")
 		
 		val floorSize = floatPreferencesKey(Constant.PREFERENCES_FLOOR_SIZE)
 		val movementDelay = intPreferencesKey(Constant.PREFERENCES_MOVEMENT_DELAY)
 		val easingAnimation = intPreferencesKey(Constant.PREFERENCES_EASING_ANIMATION)
+		val easingAnimationDelay = intPreferencesKey(Constant.PREFERENCES_EASING_ANIMATION_DELAY)
 	}
 	
 }

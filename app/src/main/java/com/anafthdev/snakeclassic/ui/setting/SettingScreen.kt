@@ -74,6 +74,13 @@ fun SettingScreen(
 				viewModel.updateEasingAnimation(easing)
 			}
 		)
+		
+		EasingAnimationDelayPreference(
+			delay = viewModel.easingAnimationDelay,
+			onEasingAnimationDelayChanged = { delay ->
+				viewModel.updateEasingAnimationDelay(delay)
+			}
+		)
 	}
 	
 }
@@ -249,7 +256,7 @@ private fun EasingAnimationPreference(
 	onEasingAnimationChanged: (Easing) -> Unit
 ) {
 	
-	var easingAnimationSliderVisible by remember { mutableStateOf(false) }
+	var easingAnimationSelectorVisible by remember { mutableStateOf(false) }
 	
 	BasicPreference(
 		showValue = true,
@@ -269,14 +276,14 @@ private fun EasingAnimationPreference(
 			Text("$easing")
 		},
 		onClick = {
-			easingAnimationSliderVisible = !easingAnimationSliderVisible
+			easingAnimationSelectorVisible = !easingAnimationSelectorVisible
 		},
 		modifier = Modifier
 			.fillMaxWidth()
 	)
 	
 	AnimatedVisibility(
-		visible = easingAnimationSliderVisible,
+		visible = easingAnimationSelectorVisible,
 		enter = expandVertically(
 			initialHeight = { -it },
 			animationSpec = tween(400)
@@ -322,6 +329,92 @@ private fun EasingAnimationPreference(
 							.padding(horizontal = 4.dp)
 					)
 				}
+			}
+			
+			Spacer(modifier = Modifier.height(4.dp))
+			
+			Divider(modifier = Modifier.fillMaxWidth())
+		}
+	}
+}
+
+@Composable
+private fun EasingAnimationDelayPreference(
+	delay: Int,
+	onEasingAnimationDelayChanged: (Int) -> Unit
+) {
+	
+	var easingAnimationDelaySliderVisible by remember { mutableStateOf(false) }
+	
+	BasicPreference(
+		showValue = true,
+		title = {
+			Text(
+				text = "Snake Easing Animation Delay",
+				overflow = TextOverflow.Ellipsis
+			)
+		},
+		icon = {
+			Icon(
+				painter = painterResource(id = R.drawable.ic_animation),
+				contentDescription = null
+			)
+		},
+		value = {
+			Text("$delay ms")
+		},
+		onClick = {
+			easingAnimationDelaySliderVisible = !easingAnimationDelaySliderVisible
+		},
+		modifier = Modifier
+			.fillMaxWidth()
+	)
+	
+	AnimatedVisibility(
+		visible = easingAnimationDelaySliderVisible,
+		enter = expandVertically(
+			initialHeight = { -it },
+			animationSpec = tween(400)
+		) + fadeIn(
+			animationSpec = tween(200)
+		),
+		exit = shrinkVertically(
+			targetHeight = { -it },
+			animationSpec = tween(400)
+		) + fadeOut(
+			animationSpec = tween(200)
+		)
+	) {
+		Column(
+			modifier = Modifier
+				.padding(
+					horizontal = 8.dp
+				)
+		) {
+			Box(
+				contentAlignment = Alignment.Center
+			) {
+				SliderVerticalLines(
+					labels = Constant.movementDelayLabelsPreference,
+					lineColor = Color.DarkGray,
+					lineHeight = 8.dp,
+					modifier = Modifier.matchParentSize()
+				)
+				
+				Slider(
+					steps = 999,
+					valueRange = 0f..1000f,
+					value = delay.toFloat(),
+					onValueChange = { delay ->
+						onEasingAnimationDelayChanged(delay.toInt())
+					},
+					colors = SliderDefaults.colors(
+						activeTickColor = Color.Transparent,
+						inactiveTickColor = Color.Transparent
+					),
+					modifier = Modifier
+						.fillMaxWidth()
+				)
 			}
 			
 			Spacer(modifier = Modifier.height(4.dp))
