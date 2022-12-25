@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.anafthdev.snakeclassic.common.Board
+import com.anafthdev.snakeclassic.common.LocalGameConfiguration
 import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.Direction.*
 import kotlin.math.floor
@@ -21,13 +22,23 @@ fun GameBoard(
 	modifier: Modifier = Modifier
 ) {
 	
+	val gameConfig = LocalGameConfiguration.current!!
+	
 	val context = LocalContext.current
 	val density = LocalDensity.current
 	
 	var boardSizeDp by remember { mutableStateOf(DpSize(0.dp, 0.dp)) }
 	
-	val floorSize = remember(boardSizeDp.width) {
-		boardSizeDp.width / board.width
+	val floorSize = remember(gameConfig.floorSize) {
+		gameConfig.floorSize.dp
+	}
+	
+	val boardWidth = remember(boardSizeDp.width, floorSize) {
+		val width = boardSizeDp.width / floorSize
+		
+		floor(width).toInt().also { newBoardWidth ->
+			board.updateWidth(newBoardWidth)  // Update board width
+		}
 	}
 	
 	val boardHeight = remember(boardSizeDp.height, floorSize) {
@@ -82,7 +93,7 @@ fun GameBoard(
 		
 		BoardBackground(
 			floorSize = floorSize,
-			boardWidthCount = board.width,
+			boardWidthCount = boardWidth,
 			boardHeightCount = boardHeight,
 			modifier = Modifier
 				.zIndex(1f)

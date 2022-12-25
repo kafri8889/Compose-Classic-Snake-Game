@@ -1,5 +1,6 @@
 package com.anafthdev.snakeclassic.common
 
+import android.util.Size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -19,9 +20,14 @@ class Board(
 		foodPosition = pos
 	}
 	
+	fun updateWidth(newWidth: Int) {
+		width = newWidth
+		listener?.onSizeChanged(Size(width, height))
+	}
+	
 	fun updateHeight(newHeight: Int) {
 		height = newHeight
-		listener?.onHeightChanged(newHeight)
+		listener?.onSizeChanged(Size(width, height))
 	}
 	
 	fun setListener(mListener: BoardListener) {
@@ -30,7 +36,7 @@ class Board(
 	
 	interface BoardListener {
 		
-		fun onHeightChanged(newHeight: Int)
+		fun onSizeChanged(size: Size)
 		
 	}
 

@@ -1,5 +1,6 @@
 package com.anafthdev.snakeclassic.common
 
+import android.util.Size
 import com.anafthdev.snakeclassic.data.CollisionType
 import com.anafthdev.snakeclassic.data.Direction
 import com.anafthdev.snakeclassic.model.Point
@@ -20,7 +21,7 @@ class GameEngine(
 	
 	init {
 		board.setListener(object : Board.BoardListener {
-			override fun onHeightChanged(newHeight: Int) {
+			override fun onSizeChanged(size: Size) {
 				try {
 					randomFood()
 				} catch (e: IllegalArgumentException) {
