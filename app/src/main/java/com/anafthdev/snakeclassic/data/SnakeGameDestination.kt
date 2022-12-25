@@ -10,6 +10,16 @@ sealed class SnakeGameDestination(val route: String) {
 		object Home: SnakeGameDestination("dashboard/home")
 	}
 	
+	class Setting {
+		object Root: SnakeGameDestination("setting/root")
+		object Home: SnakeGameDestination("setting/home")
+	}
+	
+	class Score {
+		object Root: SnakeGameDestination("score/root")
+		object Home: SnakeGameDestination("score/home")
+	}
+	
 	class Game {
 		object Root: SnakeGameDestination("game/root")
 		object Home: SnakeGameDestination(
