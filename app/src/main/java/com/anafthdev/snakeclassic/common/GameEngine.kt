@@ -9,7 +9,8 @@ import kotlin.random.Random
 
 class GameEngine(
 	private val board: Board,
-	private val snake: Snake
+	private val snake: Snake,
+	private val gameConfiguration: GameConfiguration
 ) {
 	
 	private var engineJob: Job? = null
@@ -88,7 +89,9 @@ class GameEngine(
 		
 		engineJob = CoroutineScope(Dispatchers.IO).launch {
 			while (true) {
-				delay(600)
+				delay(gameConfiguration.movementDelay.toLong())
+				
+				if (!isPaused) snake.move()
 				
 				when (checkCollision()) {
 					CollisionType.Body, CollisionType.Board -> {
@@ -101,8 +104,6 @@ class GameEngine(
 					}
 					else -> {}
 				}
-				
-				if (!isPaused) snake.move()
             }
 		}
 		

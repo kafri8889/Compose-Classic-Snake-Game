@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anafthdev.snakeclassic.common.Board
+import com.anafthdev.snakeclassic.common.GameConfiguration
 import com.anafthdev.snakeclassic.common.GameEngine
 import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.ARG_RESTART_GAME
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
-	savedStateHandle: SavedStateHandle
+	savedStateHandle: SavedStateHandle,
+	gameConfiguration: GameConfiguration
 ): ViewModel() {
 	
 	private val _board: Board = Board()
@@ -28,7 +30,8 @@ class GameViewModel @Inject constructor(
 	
 	private val _gameEngine: GameEngine = GameEngine(
 		board = _board,
-        snake = _snake
+        snake = _snake,
+		gameConfiguration = gameConfiguration
 	)
 	
 	private val restartGame: StateFlow<Boolean> = savedStateHandle.getStateFlow(ARG_RESTART_GAME, true)

@@ -1,7 +1,6 @@
 package com.anafthdev.snakeclassic.uicomponent
 
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -15,8 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import com.anafthdev.snakeclassic.common.LocalGameConfiguration
 import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.Direction
+import com.anafthdev.snakeclassic.extension.easing
 
 @Composable
 fun SnakeBody(
@@ -24,6 +25,8 @@ fun SnakeBody(
 	floorSize: Dp,
 	modifier: Modifier = Modifier
 ) {
+	
+	val gameConfig = LocalGameConfiguration.current!!
 
 //	Timber.i("bodi: ${snake.bodies.toList()}")
 	
@@ -110,8 +113,8 @@ fun SnakeBody(
 			offsetX.animateTo(
 				targetValue = body.x.toFloat(),
 				animationSpec = tween(
-					durationMillis = 450,
-					easing = LinearEasing
+					durationMillis = gameConfig.easingAnimationDelay,
+					easing = gameConfig.easingAnimation.easing
 				)
 			)
 		}
@@ -120,8 +123,8 @@ fun SnakeBody(
 			offsetY.animateTo(
 				targetValue = body.y.toFloat(),
 				animationSpec = tween(
-					durationMillis = 450,
-					easing = LinearEasing
+					durationMillis = gameConfig.easingAnimationDelay,
+					easing = gameConfig.easingAnimation.easing
 				)
 			)
 		}
