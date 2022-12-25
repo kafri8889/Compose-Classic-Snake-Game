@@ -23,6 +23,7 @@ fun SliderVerticalLines(
 	labels: List<String>,
 	lineHeight: Dp,
 	modifier: Modifier = Modifier,
+	rem: Int = 2,
 	lineColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
 	
@@ -57,7 +58,7 @@ fun SliderVerticalLines(
 				)
 				
 				// Draw label
-				if (i.rem(2) == 1) {
+				if (i.rem(rem) == 1) {
 					val topLeft = Offset(
 						x = drawPadding + i.times(distance),
 						y = 0f - labelBottomPadding

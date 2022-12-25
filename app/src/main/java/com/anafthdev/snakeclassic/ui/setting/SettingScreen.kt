@@ -139,6 +139,7 @@ private fun FloorSizePreference(
 				contentAlignment = Alignment.Center
 			) {
 				SliderVerticalLines(
+					rem = 6,
 					labels = Constant.floorSizeLabelsPreference,
 					lineColor = Color.DarkGray,
 					lineHeight = 8.dp,
@@ -146,8 +147,8 @@ private fun FloorSizePreference(
 				)
 				
 				Slider(
-					steps = 7,
-					valueRange = 2f..10f,
+					steps = 29,
+					valueRange = 2f..32f,
 					value = floorSize,
 					onValueChange = onFloorSizeChanged,
 					colors = SliderDefaults.colors(
