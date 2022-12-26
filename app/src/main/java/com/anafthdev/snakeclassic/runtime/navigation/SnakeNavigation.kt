@@ -1,4 +1,4 @@
-package com.anafthdev.snakeclassic.ui.main
+package com.anafthdev.snakeclassic.runtime.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,9 +8,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.anafthdev.snakeclassic.data.SnakeGameDestination
-import com.anafthdev.snakeclassic.runtime.navigation.DashboardAnimatedNavHost
-import com.anafthdev.snakeclassic.runtime.navigation.GameAnimatedNavHost
-import com.anafthdev.snakeclassic.runtime.navigation.SettingAnimatedNavHost
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
