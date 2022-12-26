@@ -78,6 +78,10 @@ class GameEngine(
 	}
 	
 	fun restart() {
+		listener?.onRestart()
+		
+		isPaused = true
+		
 		snake.updateDirection(Direction.Right)
 		snake.bodies.apply {
 			clear()
@@ -137,6 +141,8 @@ class GameEngine(
 		fun isPlaying(playing: Boolean)
 		
 		fun onGameOver()
+		
+		fun onRestart()
 		
 	}
 	

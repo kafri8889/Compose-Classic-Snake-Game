@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.anafthdev.snakeclassic.uicomponent.GameBoard
+import com.anafthdev.snakeclassic.uicomponent.GameOverDialog
 import com.anafthdev.snakeclassic.uicomponent.GamePauseDialog
 
 @Composable
@@ -25,6 +26,15 @@ fun GameScreen(
 	// prevent popup twice
 	// because the popup still appears for a while when the user click exit button
 	var hasPopped by remember { mutableStateOf(false) }
+	
+//	LaunchedEffect(effect) {
+//		when (effect) {
+//			is GameEffect.GameOver -> {
+//
+//			}
+//			else -> {}
+//		}
+//	}
 	
 	BackHandler {
 		when {
@@ -66,6 +76,22 @@ fun GameScreen(
 				},
 				onResume = {
 					gameViewModel.resume()
+				}
+			)
+		}
+		
+		AnimatedVisibility(visible = gameViewModel.isGameOver) {
+			GameOverDialog(
+				score = 0,
+				onExit = {
+					if (!hasPopped) {
+						navController.popBackStack()
+					}
+					
+					hasPopped = true
+				},
+				onRestart = {
+					gameViewModel.start()
 				}
 			)
 		}
