@@ -1,5 +1,7 @@
 package com.anafthdev.snakeclassic.ui.dashboard
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -9,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -17,6 +20,8 @@ import com.anafthdev.snakeclassic.data.SnakeGameDestination
 
 @Composable
 fun DashboardScreen(navController: NavController) {
+	
+	val context = LocalContext.current
 	
 	Column(
 		horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,6 +77,22 @@ fun DashboardScreen(navController: NavController) {
 			) {
 				Icon(
 					painter = painterResource(id = R.drawable.ic_award),
+					contentDescription = null
+				)
+			}
+			
+			IconButton(
+				onClick = {
+					context.startActivity(
+						Intent(Intent.ACTION_VIEW).apply {
+							flags = Intent.FLAG_ACTIVITY_NEW_TASK
+							data = Uri.parse("https://github.com/kafri8889/Compose-Classic-Snake-Game")
+						}
+					)
+				}
+			) {
+				Icon(
+					painter = painterResource(id = R.drawable.ic_github_mark),
 					contentDescription = null
 				)
 			}
