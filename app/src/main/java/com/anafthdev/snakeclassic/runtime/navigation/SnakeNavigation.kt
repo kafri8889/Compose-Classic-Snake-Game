@@ -19,7 +19,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 	ExperimentalAnimationApi::class
 )
 @Composable
-fun MainScreen() {
+fun SnakeNavigation() {
 	
 	val scope = rememberCoroutineScope()
 	val systemUiController = rememberSystemUiController()

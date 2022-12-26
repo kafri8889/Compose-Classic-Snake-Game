@@ -12,7 +12,7 @@ import androidx.core.view.WindowCompat
 import com.anafthdev.snakeclassic.common.GameConfiguration
 import com.anafthdev.snakeclassic.common.LocalGameConfiguration
 import com.anafthdev.snakeclassic.theme.SnakeClassicTheme
-import com.anafthdev.snakeclassic.ui.main.MainScreen
+import com.anafthdev.snakeclassic.ui.main.SnakeNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 					CompositionLocalProvider(
 						LocalGameConfiguration provides gameConfiguration
 					) {
-						MainScreen()
+						SnakeNavigation()
 					}
 				}
 			}
