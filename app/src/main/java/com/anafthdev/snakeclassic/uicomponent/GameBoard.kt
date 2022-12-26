@@ -22,15 +22,14 @@ fun GameBoard(
 	modifier: Modifier = Modifier
 ) {
 	
-	val gameConfig = LocalGameConfiguration.current!!
-	
 	val context = LocalContext.current
 	val density = LocalDensity.current
+	val gameConfig = LocalGameConfiguration.current!!
 	
 	var boardSizeDp by remember { mutableStateOf(DpSize(0.dp, 0.dp)) }
 	
 	val floorSize = remember(gameConfig.floorSize) {
-		gameConfig.floorSize.dp
+		gameConfig.floorSize.dp * density.density
 	}
 	
 	val boardWidth = remember(boardSizeDp.width, floorSize) {
