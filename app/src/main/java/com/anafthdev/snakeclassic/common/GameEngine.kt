@@ -22,11 +22,13 @@ class GameEngine(
 	init {
 		board.setListener(object : Board.BoardListener {
 			override fun onSizeChanged(size: Size) {
-				try {
-					randomFood()
-				} catch (e: IllegalArgumentException) {
-					// Random range is empty: [0, -1)
-					Timber.e(e)
+				if (size.width != 0 && size.height != 0) {
+					try {
+						randomFood()
+					} catch (e: IllegalArgumentException) {
+						// Random range is empty: [0, -1]
+						Timber.e(e)
+					}
 				}
 			}
 		})
