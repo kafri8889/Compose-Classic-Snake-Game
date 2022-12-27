@@ -9,8 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -30,7 +28,7 @@ fun DashboardScreen(navController: NavController) {
 			.fillMaxSize()
 	) {
 		Image(
-			painter = ColorPainter(Color.LightGray),  // App icon
+			painter = painterResource(id = R.drawable.ic_app_icon),
 			contentDescription = null,
 			modifier = Modifier
 				.size(96.dp)
