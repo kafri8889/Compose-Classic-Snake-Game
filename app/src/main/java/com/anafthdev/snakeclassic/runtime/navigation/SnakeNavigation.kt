@@ -39,6 +39,8 @@ fun SnakeNavigation() {
 		
 		SettingAnimatedNavHost(navController)
 		
+		ScoreAnimatedNavHost(navController)
+		
 		GameAnimatedNavHost(navController)
 	}
 }

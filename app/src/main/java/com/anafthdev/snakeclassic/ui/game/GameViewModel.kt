@@ -11,15 +11,20 @@ import com.anafthdev.snakeclassic.common.GameConfiguration
 import com.anafthdev.snakeclassic.common.GameEngine
 import com.anafthdev.snakeclassic.common.Snake
 import com.anafthdev.snakeclassic.data.ARG_RESTART_GAME
+import com.anafthdev.snakeclassic.data.repository.Repository
+import com.anafthdev.snakeclassic.model.GameConfigurationData
+import com.anafthdev.snakeclassic.model.Score
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class GameViewModel @Inject constructor(
+	private val repository: Repository,
 	savedStateHandle: SavedStateHandle,
 	gameConfiguration: GameConfiguration
 ): ViewModel() {
@@ -63,6 +68,20 @@ class GameViewModel @Inject constructor(
 			override fun onGameOver() {
 				_effect.value = GameEffect.GameOver
 				isGameOver = true
+				
+				viewModelScope.launch {
+					repository.insertScore(
+						Score(
+							id = Random.nextInt(),
+							score = score,
+							gameConfigurationData = GameConfigurationData(
+								floorSize = gameConfiguration.floorSize,
+								movementDelay = gameConfiguration.movementDelay,
+								easingAnimationDelay = gameConfiguration.easingAnimationDelay
+							)
+						)
+					)
+				}
 			}
 			
 			override fun onRestart() {
