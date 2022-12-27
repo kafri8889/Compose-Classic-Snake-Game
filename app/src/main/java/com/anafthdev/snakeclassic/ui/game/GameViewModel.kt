@@ -40,6 +40,7 @@ class GameViewModel @Inject constructor(
 	
 	val effect: StateFlow<GameEffect?> = _effect.asStateFlow()
 	
+	var score by mutableStateOf(0)
 	var isPaused by mutableStateOf(true)
 	var isGameOver by mutableStateOf(false)
 	
@@ -67,6 +68,11 @@ class GameViewModel @Inject constructor(
 			override fun onRestart() {
 				isGameOver = false
 				isPaused = true
+				score = 0
+			}
+			
+			override fun onEat() {
+				score++
 			}
 		})
 		

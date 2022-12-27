@@ -63,7 +63,7 @@ fun GameScreen(
 		
 		AnimatedVisibility(visible = gameViewModel.isPaused) {
 			GamePauseDialog(
-				currentScore = 0,
+				currentScore = gameViewModel.score,
 				onExit = {
 					if (!hasPopped) {
 						navController.popBackStack()
@@ -82,7 +82,7 @@ fun GameScreen(
 		
 		AnimatedVisibility(visible = gameViewModel.isGameOver) {
 			GameOverDialog(
-				score = 0,
+				score = gameViewModel.score,
 				onExit = {
 					if (!hasPopped) {
 						navController.popBackStack()

@@ -106,6 +106,7 @@ class GameEngine(
 						stop()
 					}
 					CollisionType.Food -> {
+						listener?.onEat()
 						snake.addBody()
 						randomFood()
 					}
@@ -143,6 +144,8 @@ class GameEngine(
 		fun onGameOver()
 		
 		fun onRestart()
+		
+		fun onEat()
 		
 	}
 	
