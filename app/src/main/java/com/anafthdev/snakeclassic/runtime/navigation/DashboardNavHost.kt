@@ -3,11 +3,13 @@ package com.anafthdev.snakeclassic.runtime.navigation
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.anafthdev.snakeclassic.data.SnakeGameDestination
 import com.anafthdev.snakeclassic.ui.dashboard.DashboardScreen
+import com.anafthdev.snakeclassic.ui.dashboard.DashboardViewModel
 import com.google.accompanist.navigation.animation.composable
 
 //fun NavGraphBuilder.DashboardNavHost(navController: NavController) {
@@ -33,8 +35,13 @@ fun NavGraphBuilder.DashboardAnimatedNavHost(navController: NavController) {
 			exitTransition = { fadeOut() },
 			popEnterTransition = { fadeIn() },
 			popExitTransition = { fadeOut() }
-		) {
-			DashboardScreen(navController = navController)
+		) { backEntry ->
+			val viewModel = hiltViewModel<DashboardViewModel>(backEntry)
+			
+			DashboardScreen(
+				navController = navController,
+				viewModel = viewModel
+			)
 		}
 	}
 }

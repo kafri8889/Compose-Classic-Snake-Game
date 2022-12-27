@@ -17,7 +17,10 @@ import com.anafthdev.snakeclassic.R
 import com.anafthdev.snakeclassic.data.SnakeGameDestination
 
 @Composable
-fun DashboardScreen(navController: NavController) {
+fun DashboardScreen(
+	navController: NavController,
+	viewModel: DashboardViewModel
+) {
 	
 	val context = LocalContext.current
 	
@@ -38,7 +41,7 @@ fun DashboardScreen(navController: NavController) {
 		Spacer(modifier = Modifier.padding(8.dp))
 		
 		Text(
-			text = "Highest Score: 0",
+			text = "Highest Score: ${viewModel.highestScore}",
 			style = MaterialTheme.typography.titleSmall
 		)
 		

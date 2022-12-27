@@ -13,6 +13,10 @@ class Repository @Inject constructor(
 		return localDatasource.getAllScore()
 	}
 	
+	fun getHighestScore(): Flow<Score> {
+		return localDatasource.getHighestScore()
+	}
+	
 	
 	
 	suspend fun insertScore(vararg score: Score) {

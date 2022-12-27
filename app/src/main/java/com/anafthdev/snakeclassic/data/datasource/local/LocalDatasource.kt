@@ -13,6 +13,10 @@ class LocalDatasource @Inject constructor(
 		return scoreReadDAO.getAll()
 	}
 	
+	fun getHighestScore(): Flow<Score> {
+		return scoreReadDAO.getHighestScore()
+	}
+	
 	
 	
 	suspend fun insertScore(vararg score: Score) {

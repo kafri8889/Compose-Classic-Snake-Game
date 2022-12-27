@@ -11,4 +11,7 @@ interface ScoreReadDAO {
 	@Query("SELECT * FROM score")
 	fun getAll(): Flow<List<Score>>
 	
+	@Query("SELECT * FROM score ORDER BY score DESC LIMIT 1")
+	fun getHighestScore(): Flow<Score>
+	
 }
